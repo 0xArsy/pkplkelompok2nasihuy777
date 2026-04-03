@@ -7,18 +7,24 @@ import { isAuthorized } from '@/data/members';
 export default function AuthButton() {
   const [user, setUser] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
   const handleSignIn = async () => {
+    if (loading) return; // Prevent multiple requests
+    setLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
     } catch (error) {
-      console.error("Sign in failed:", error);
+      console.error("sign in failed:", error);
+      setLoading(false);
     }
   };
 
@@ -28,11 +34,19 @@ export default function AuthButton() {
     return (
       <div className="auth-container">
         <span className="user-email">{user.email}</span>
-        {isAuthorized(user.email) && <span className="admin-badge">Team Member</span>}
-        <button onClick={handleSignOut} className="btn-secondary">Log Out</button>
+        {isAuthorized(user.email) && <span className="admin-status">team member</span>}
+        <button onClick={handleSignOut} className="btn-secondary">log out</button>
       </div>
     );
   }
 
-  return <button onClick={handleSignIn} className="btn-primary">Login with Google</button>;
+  return (
+    <button 
+      onClick={handleSignIn} 
+      className="btn-primary" 
+      disabled={loading}
+    >
+      {loading ? "logging in..." : "login with google"}
+    </button>
+  );
 }
