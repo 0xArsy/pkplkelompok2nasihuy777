@@ -1,5 +1,7 @@
 # PKPL Tugas 2 - Kelompok Nasihuy777
 
+Link Vercel : https://pkplkelompok2nasihuy777.vercel.app/
+
 Repository ini dibuat untuk memenuhi Tugas 2 mata kuliah Pengantar Keamanan Perangkat Lunak (PKPL). Fokus utamanya adalah implementasi Authentication & Authorization menggunakan Google OAuth (Firebase).
 
 ## Fitur Utama
