@@ -34,8 +34,8 @@ export default function AuthButton() {
     return (
       <div className="auth-container">
         <span className="user-email">{user.email}</span>
-        {isAuthorized(user.email) && <span className="admin-status">team member</span>}
-        <button onClick={handleSignOut} className="btn-secondary">log out</button>
+        {isAuthorized(user.email) && <span className="admin-status">Team Member</span>}
+        <button onClick={handleSignOut} className="btn-secondary">Log Out</button>
       </div>
     );
   }
@@ -46,7 +46,7 @@ export default function AuthButton() {
       className="btn-primary" 
       disabled={loading}
     >
-      {loading ? "logging in..." : "login with google"}
+      {loading ? "Logging in..." : "Login With Google"}
     </button>
   );
 }
